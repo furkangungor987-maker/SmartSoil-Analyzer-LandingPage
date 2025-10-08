@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartSoil Analyzer | Akıllı Toprak Analizi</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* TEMEL STİLLER ve Renk Paleti */
+        :root {
+            --primary-blue: #007bff;
+            --primary-green: #28a745;
+            --dark-green: #1e8449;
+            --bg-light: #f8f9fa; /* Artık section'lar için rgba olarak kullanılacak */
+            --text-dark: #333;
+            --footer-bg: #212529; /* Artık rgba olarak kullanılacak */
+            --footer-text: #adb5bd;
+            --light-gray-bg: #f2f4f6; /* Artık rgba olarak kullanılacak */
+
+            /* YENİ: Saydam renkler */
+            --transparent-white: rgba(255, 255, 255, 0.85); /* Beyazı %85 saydam */
+            --transparent-light-gray: rgba(248, 249, 250, 0.85); /* Açık griyi %85 saydam */
+            --transparent-dark-bg: rgba(33, 37, 41, 0.9); /* Footer için koyu rengi %90 saydam */
+            --transparent-section-bg: rgba(255, 255, 255, 0.9); /* Section'lar için biraz daha opak beyaz */
+            --transparent-hero-bg: rgba(224, 242, 241, 0.8); /* Hero için özel hafif saydam renk */
+        }
+
+        body { 
+            font-family: 'Poppins', sans-serif;
+            margin: 0; 
+            padding: 0; 
+            color: var(--text-dark); 
+            scroll-behavior: smooth; 
+            line-height: 1.6;
+
+            /* YENİ: Arka Plan Görseli */
+            background-image: url('tarla.jpg'); /* Örnek tarım-teknoloji görseli */
+            background-size: cover; /* Tüm alanı kapla */
+            background-attachment: fixed; /* Sayfa kaydırıldığında sabit kal */
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        section { padding: 100px 0; text-align: center; }
+        h2 { font-size: 2.8em; color: var(--dark-green); margin-bottom: 50px; font-weight: 700; }
+
+        /* HEADER & NAVİGASYON STİLLERİ */
+        .header { 
+            /* background-color: #ffffff; -> Şeffaf yapıldı */
+            background-color: var(--transparent-white); /* YENİ: Saydam beyaz */
+            padding: 15px 50px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            position: sticky; 
+            top: 0; 
+            z-index: 1000;
+            transition: box-shadow 0.3s, background-color 0.3s; /* Transition eklendi */
+        }
+        .header.scrolled {
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            background-color: rgba(255, 255, 255, 0.95); /* Kaydırıldığında biraz daha opak olabilir */
+        }
+        .logo a { 
+            color: var(--dark-green);
+            text-decoration: none; 
+            font-size: 1.6em; 
+            font-weight: 700; 
+            display: flex; 
+            align-items: center; 
+        }
+        .logo img { height: 40px; margin-right: 10px; }
+        
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.8em;
+            cursor: pointer;
+            color: var(--dark-green);
+            padding: 0;
+        }
+
+        .nav-links a { 
+            margin-left: 30px; 
+            text-decoration: none; 
+            color: #555; 
+            font-weight: 600; 
+            transition: color 0.3s; 
+        }
+        .nav-links a:hover,
+        .nav-links a.active-link { 
+            color: var(--primary-green); 
+        }
+        
+        .cta-button { 
+            background-color: var(--primary-green); 
+            color: white; 
+            padding: 10px 20px; 
+            border-radius: 5px; 
+            text-decoration: none; 
+            font-weight: bold; 
+            margin-left: 30px; 
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        .cta-button:hover { 
+            background-color: var(--dark-green); 
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.4); 
+        }
+
+        /* HERO ve SECTION Stilleri */
+        #hero { 
+            /* background: linear-gradient(135deg, #e0f2f1 0%, #e9ecef 100%); -> Şeffaf yapıldı */
+            background-color: var(--transparent-hero-bg); /* YENİ: Saydam hero rengi */
+            padding: 150px 20px; 
+        }
+        #hero h1 { font-size: 3.8em; color: var(--text-dark); margin-bottom: 20px; line-height: 1.2; }
+        #hero p { font-size: 1.4em; color: #555; margin-bottom: 50px; max-width: 800px; margin-left: auto; margin-right: auto; }
+        .cta-primary { background-color: var(--primary-blue); color: white; padding: 18px 35px; text-decoration: none; border-radius: 50px; font-size: 1.3em; font-weight: bold; transition: background-color 0.3s, transform 0.3s; letter-spacing: 1px; display: inline-block; }
+        .cta-primary:hover { background-color: #0056b3; transform: scale(1.05); }
+
+        #ozellikler { 
+            /* background-color: #ffffff; -> Şeffaf yapıldı */
+            background-color: var(--transparent-section-bg); /* YENİ: Saydam bölüm rengi */
+        }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 40px; }
+        .feature-item { 
+            padding: 40px; 
+            border: 1px solid #eee; 
+            border-radius: 12px; 
+            text-align: center; 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.05); 
+            transition: transform 0.3s, box-shadow 0.3s, opacity 0.6s ease-out, transform 0.6s ease-out; 
+            /* background-color: white; -> Şeffaf yapıldı */
+            background-color: var(--transparent-white); /* YENİ: Saydam kart rengi */
+        }
+        .feature-item:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .feature-item i { font-size: 3.5em; color: var(--primary-green); margin-bottom: 20px; }
+        .feature-item h3 { color: var(--primary-blue); margin-top: 15px; font-size: 1.5em; }
+
+        /* YENİ: Animasyon sınıfları (Değişmedi) */
+        .animate-on-scroll { opacity: 0; transform: translateY(20px); }
+        .animated { opacity: 1; transform: translateY(0); }
+
+        #ekip { 
+            /* background-color: var(--bg-light); -> Şeffaf yapıldı */
+            background-color: var(--transparent-section-bg); /* YENİ: Saydam bölüm rengi */
+        }
+        .team-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 40px; }
+        .team-member { 
+            width: 250px; 
+            padding: 30px; 
+            /* background-color: #fff; -> Şeffaf yapıldı */
+            background-color: var(--transparent-white); /* YENİ: Saydam kart rengi */
+            border-radius: 10px; 
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.5s ease-out, opacity 0.5s ease-out; 
+        }
+        .team-member img { 
+            width: 150px; 
+            height: 150px; 
+            object-fit: cover; 
+            border-radius: 50%; 
+            margin-bottom: 20px; 
+            border: 4px solid var(--primary-green);
+            aspect-ratio: 1/1; 
+        }
+        .team-member h4 { margin: 5px 0; color: var(--primary-blue); font-size: 1.3em; }
+        .team-member p { font-size: 0.95em; color: #777; }
+        
+        #iletisim { 
+            /* background-color: #ffffff; -> Şeffaf yapıldı */
+            background-color: var(--transparent-section-bg); /* YENİ: Saydam bölüm rengi */
+        }
+        #iletisim form { 
+            max-width: 600px; margin: 0 auto; text-align: left; padding: 30px; border-radius: 8px; 
+            /* box-shadow: 0 5px 15px rgba(0,0,0,0.05); -> gölgesi hafifletildi */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03); /* YENİ: Daha hafif gölge */
+            background-color: var(--transparent-white); /* YENİ: Saydam form arka planı */
+        }
+        #iletisim label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--dark-green); }
+        #iletisim input[type="text"], #iletisim input[type="email"], #iletisim textarea {
+            width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background-color: rgba(255, 255, 255, 0.7); /* YENİ: Input alanları da saydam */
+        }
+        #iletisim input:focus, #iletisim textarea:focus {
+             border-color: var(--primary-blue);
+             box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.45); 
+             outline: none;
+        }
+        #iletisim textarea { resize: vertical; }
+        #iletisim button { background-color: var(--primary-green); color: white; padding: 14px 25px; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1em; width: 100%; font-weight: 700; transition: background-color 0.3s; }
+        #iletisim button:hover { background-color: var(--dark-green); }
+
+        /* SIKÇA SORULAN SORULAR (SSS) BÖLÜMÜ */
+        #sss { 
+            /* background-color: var(--light-gray-bg); -> Şeffaf yapıldı */
+            background-color: var(--transparent-section-bg); /* YENİ: Saydam bölüm rengi */
+            padding: 100px 0; text-align: center; 
+        }
+        .faq-container { max-width: 800px; margin: 50px auto 0 auto; text-align: left; }
+        .faq-item { 
+            border: 1px solid #eee; border-radius: 8px; margin-bottom: 15px; overflow: hidden; 
+            background-color: var(--transparent-white); /* YENİ: SSS öğeleri de saydam */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* SSS öğelerine hafif gölge */
+        }
+        .faq-question {
+            /* background-color: #ffffff; -> Şeffaf yapıldı */
+            background-color: rgba(255, 255, 255, 0.9); /* YENİ: Soru kısmı biraz daha opak */
+            padding: 20px 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 1.1em;
+            transition: background-color 0.3s;
+        }
+        .faq-question:hover { background-color: rgba(240, 240, 240, 0.9); } /* Hover'da hafif opaklık */
+        .faq-question i { transition: transform 0.3s ease; }
+        .faq-question.active i { transform: rotate(180deg); }
+        .faq-answer {
+            /* background-color: var(--bg-light); -> Şeffaf yapıldı */
+            background-color: rgba(248, 249, 250, 0.8); /* YENİ: Cevap kısmı hafif saydam */
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+            color: #555;
+        }
+        .faq-answer.active { max-height: 300px; padding-top: 15px; padding-bottom: 15px; }
+        .faq-answer p { margin: 0; }
+
+        /* FOOTER STİLLERİ */
+        .footer { 
+            /* background-color: var(--footer-bg); -> Şeffaf yapıldı */
+            background-color: var(--transparent-dark-bg); /* YENİ: Saydam koyu footer */
+            color: var(--footer-text); padding: 50px 0 20px 0; font-size: 0.95em; 
+        }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; text-align: left; padding-bottom: 40px; border-bottom: 1px solid rgba(52, 58, 64, 0.5); /* YENİ: Border da saydam yapıldı */ }
+        .footer h4 { color: #ffffff; margin-bottom: 15px; font-size: 1.1em; font-weight: 600; }
+        .footer ul { list-style: none; padding: 0; margin: 0; }
+        .footer ul li { margin-bottom: 10px; }
+        .footer ul li a { color: var(--footer-text); text-decoration: none; transition: color 0.3s; }
+        .footer ul li a:hover { color: var(--primary-green); }
+        .social-links a { color: #ffffff; font-size: 1.5em; margin-right: 15px; transition: color 0.3s; }
+        .social-links a:hover { color: var(--primary-green); }
+        .copyright { text-align: center; margin-top: 20px; padding-top: 10px; color: #6c757d; font-size: 0.9em; }
+
+        /* RESPONSIVE DÜZENLEME (Değişmedi) */
+        @media (max-width: 768px) {
+            .header { padding: 15px 20px; }
+            .menu-toggle { display: block; z-index: 1001; }
+            .nav-links { position: fixed; top: 0; left: -100%; width: 100%; height: 100vh; background-color: var(--transparent-white); /* Mobil menü de saydam */ flex-direction: column; justify-content: center; align-items: center; padding-top: 60px; transition: left 0.3s ease-in-out; }
+            .nav-links.active { left: 0; }
+            .nav-links a { margin: 20px 0; font-size: 1.4em; color: var(--text-dark); width: 80%; text-align: center; padding: 10px 0; }
+            .cta-button { margin-top: 30px; width: 60%; }
+            #hero h1 { font-size: 2.5em; }
+            #hero p { font-size: 1.1em; }
+            .cta-primary { font-size: 1.1em; padding: 15px 25px; }
+            h2 { font-size: 2em; }
+            section { padding: 60px 20px; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .footer-grid > div { margin-bottom: 20px; }
+            .social-links { text-align: center; margin-top: 15px; }
+            #iletisim form { padding: 20px; }
+        }
+
+        /* YUKARI ÇIK DÜĞMESİ (Değişmedi) */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary-green);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5em;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: all 0.3s;
+            opacity: 0; 
+            visibility: hidden; 
+            z-index: 999;
+        }
+        .back-to-top.show { opacity: 1; visibility: visible; }
+        .back-to-top:hover { background-color: var(--dark-green); transform: translateY(-3px); }
+    </style>
+</head>
+<body>
+
+    <header class="header" id="mainHeader">
+        <div class="logo">
+            <a href="#hero">
+                <img src="smartsoil-logo.png" alt="SmartSoil Analyzer Logo"> 
+                <span>SmartSoil Analyzer</span>
+            </a>
+        </div>
+        
+        <button class="menu-toggle" aria-label="Menü Aç/Kapa" id="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <nav class="nav-links" id="nav-links">
+            <a href="#ozellikler">Vizyon</a>
+            <a href="#ekip">Ekip</a> 
+            <a href="#sss">Proje Bilgisi</a> 
+            <a href="#iletisim">İletişim</a>
+            <a href="#iletisim" class="cta-button">PROJEYİ İNCELE</a>
+        </nav>
+    </header>
+
+    <section id="hero">
+        <div class="container">
+            <h1>Geleceğin Akıllı Toprak Analizi Projesinin Vizyonu.</h1>
+            <p>SmartSoil Analyzer ile toprak kalitesini dijitalize ederek, kaynak (su/gübre) kullanımını optimize etme potansiyelini maksimize etmeyi hedefliyoruz.</p>
+            <a href="#ozellikler" class="cta-primary">DAHA FAZLA KEŞFET</a>
+        </div>
+    </section>
+
+    <section id="ozellikler">
+        <div class="container">
+            <h2>Projemizin Temel Vizyonu</h2>
+            <div class="feature-grid">
+                
+                <div class="feature-item animate-on-scroll">
+                    <i class="fas fa-flask"></i>
+                    <h3>Hedeflenen Anlık Analiz</h3>
+                    <p>Geliştirmekte olduğumuz cihaz, toprağın fiziksel ve kimyasal özelliklerini saha koşullarında, anlık olarak ölçebilen taşınabilir bir prototip olmayı amaçlamaktadır.</p>
+                </div>
+                
+                <div class="feature-item animate-on-scroll">
+                    <i class="fas fa-seedling"></i>
+                    <h3>Yapay Zeka Prototip Entegrasyonu</h3>
+                    <p>Toplanan verilerin, yapay zekâ modeli ile işlenerek, bölgesel veri tabanına göre **tahmini** kalite skoru ve **önerilen** ürün listesini sunması hedeflenmektedir.</p>
+                </div>
+                
+                <div class="feature-item animate-on-scroll">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <h3>Sensör Hassasiyeti Çalışmaları</h3>
+                    <p>Proje kapsamında pH, Nem ve Sıcaklık sensörlerinin yüksek hassasiyetle ölçüm yapması için gerekli elektronik donanım ve yazılım optimizasyonları devam etmektedir.</p>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <section id="ekip">
+        <div class="container">
+            <h2>Ekibimizle Tanışın</h2>
+            <div class="team-grid">
+                <div class="team-member animate-on-scroll">
+                    <img src="https://i.ibb.co/L519V1j/duhan-efe.jpg" alt="Duhan Efe Aydoğan Fotoğrafı"> 
+                    <h4>Duhan Efe Aydoğan</h4>
+                    <p>Proje Ortağı / Yazılım</p>
+                </div>
+                <div class="team-member animate-on-scroll" style="transition-delay: 0.2s;">
+                    <img src="https://i.ibb.co/GvxYh7y/furkan.jpg" alt="Muhammet Furkan Çalışkan Fotoğrafı"> 
+                    <h4>Muhammet Furkan Çalışkan</h4>
+                    <p>Proje Ortağı / Donanım</p>
+                </div>
+                <div class="team-member animate-on-scroll" style="transition-delay: 0.4s;">
+                    <img src="https://i.ibb.co/pwnpT8V/alperen.jpg" alt="Alperen Güngör Fotoğrafı"> 
+                    <h4>Alperen Güngör</h4>
+                    <p>Proje Ortağı / Tasarım & UI</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="sss"> 
+        <div class="container">
+            <h2>Proje Detayları ve Yol Haritası</h2>
+            <div class="faq-container">
+                <div class="faq-item animate-on-scroll">
+                    
+                    <div class="faq-answer">
+                        <p>Projemiz şu anda **donanım prototipleme (MVP)** aşamasındadır. Elektronik kart tasarımı tamamlandı ve ilk yazılım modülleri (sensör okuma ve veri işleme) geliştirilmektedir. Hedefimiz 2024 sonuna kadar saha testlerine başlamaktır.</p>
+                    </div>
+                </div>
+                <div class="faq-item animate-on-scroll">
+                    <div class="faq-question">
+                        Proje İçin Hangi Teknolojiler Kullanılıyor?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Donanım için Arduino/ESP32 mikrodenetleyiciler, yazılım tarafında Python (veri işleme ve AI modelleri için) ve mobil arayüz için React Native (hedeflenen mobil uygulamada) kullanılması planlanmaktadır.</p>
+                    </div>
+                </div>
+                <div class="faq-item animate-on-scroll">
+                    <div class="faq-question">
+                        Cihazın Üretim Maliyet Tahmini Ne Kadar?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Prototip maliyet analizine göre, cihazın seri üretimdeki tahmini birim maliyetinin 50 ila 80 USD bandında olması hedeflenmektedir. Bu maliyet, sensör hassasiyeti ve kasa malzemesi seçimine göre değişebilir.</p>
+                    </div>
+                </div>
+                <div class="faq-item animate-on-scroll">
+                    <div class="faq-question">
+                        Proje Desteği ve Yatırımcılık Olanakları Nelerdir?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Projemiz aktif olarak TeknoFest programlarına başvurmaktadır. Yatırım ve iş birliği teklifleri için İletişim bölümünden bizimle doğrudan temasa geçebilirsiniz.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="iletisim">
+        <div class="container">
+            <h2>Bizimle İletişime Geçin</h2>
+            <form id="contact-form" action="https://formspree.io/f/meorznbn" method="POST">
+                <label for="name">Adınız Soyadınız</label>
+                <input type="text" id="name" name="Ad Soyad" required>
+
+                <label for="email">E-posta Adresiniz</label>
+                <input type="email" id="email" name="E-posta" required>
+
+                <label for="message">Mesajınız</label>
+                <textarea id="message" name="Mesaj" rows="6" required></textarea>
+
+                <button type="submit">Mesajı Gönder</button>
+            </form>
+            <p id="status-message" class="status-message"></p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                
+                <div class="footer-info">
+                    <h4>SmartSoil Analyzer</h4>
+                    <p>Akıllı toprak analizi projesi. Tarım teknolojilerinde geleceğe yatırım yapıyoruz.</p>
+                    <div class="social-links" style="margin-top: 15px;">
+                        <a href="https://twitter.com" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="mailto:info@smartsoil.com" aria-label="E-posta"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Hızlı Erişim</h4>
+                    <ul>
+                        <li><a href="#hero">Ana Sayfa</a></li>
+                        <li><a href="#ozellikler">Proje Vizyonu</a></li>
+                        <li><a href="#ekip">Ekibimiz</a></li>
+                        <li><a href="#sss">Proje Bilgisi</a></li> 
+                        <li><a href="#iletisim">Bize Ulaşın</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-contact">
+                    <h4>İletişim</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt" style="margin-right: 8px;"></i> Kağıthane, İstanbul, TR</li>
+                        <li><i class="fas fa-phone" style="margin-right: 8px;"></i> +90 537 948 72 58</li>
+                        <li><i class="fas fa-envelope" style="margin-right: 8px;"></i> alperengungrr@Gmail.com</li>
+                    </ul>
+                </div>
+
+            </div>
+            
+            <p class="copyright">
+                &copy; 2026 SmartSoil Analyzer Projesi. Tüm Hakları Saklıdır.
+            </p>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTopBtn" aria-label="Yukarı Çık">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+<script>
+    // 1. Burger Menü Fonksiyonu (Değişmedi)
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+    const navLinksArray = navLinks.querySelectorAll('a');
+
+    function toggleMenu() {
+        navLinks.classList.toggle('active');
+        const icon = menuToggle.querySelector('i');
+        if (navLinks.classList.contains('active')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+            document.body.style.overflow = 'hidden';
+        } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+            document.body.style.overflow = '';
+        }
+    }
+
+    menuToggle.addEventListener('click', toggleMenu);
+
+    navLinksArray.forEach(link => {
+        link.addEventListener('click', () => {
+            if (navLinks.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+    });
+
+    // 2. İletişim Formu Fonksiyonu (Değişmedi)
+    const form = document.getElementById("contact-form");
+    const statusMessage = document.getElementById("status-message");
+
+    function displayMessage(message, isSuccess) {
+        statusMessage.textContent = message;
+        statusMessage.className = `status-message ${isSuccess ? 'status-success' : 'status-error'}`;
+        statusMessage.style.display = "block";
+    }
+
+    async function handleSubmit(event) {
+        event.preventDefault();
+        
+        const submitButton = form.querySelector('button[type="submit"]');
+        submitButton.textContent = 'Gönderiliyor...';
+        submitButton.disabled = true;
+        statusMessage.style.display = "none";
+
+        const data = new FormData(event.target);
+        
+        try {
+            const response = await fetch(event.target.action, {
+                method: form.method,
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                displayMessage("Mesajınız başarıyla gönderildi. Teşekkür ederiz! 🌱", true);
+                form.reset(); 
+            } else {
+                const errorData = await response.json();
+                const errorMessage = errorData.errors ? 
+                                    errorData.errors.map(error => error.message).join(", ") : 
+                                    "Oops! Bir sorun oluştu, mesaj gönderilemedi.";
+                
+                displayMessage(errorMessage, false);
+            }
+        } catch (error) {
+            displayMessage("Bağlantı hatası: Mesajınız gönderilemedi. Lütfen internet bağlantınızı kontrol edin.", false);
+        } finally {
+            submitButton.textContent = 'Mesajı Gönder';
+            submitButton.disabled = false;
+        }
+    }
+    form.addEventListener("submit", handleSubmit);
+
+    // 3. SSS (FAQ) Akordeon Fonksiyonu (Değişmedi)
+    const faqQuestions = document.querySelectorAll('.faq-question');
+
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+            const answer = question.nextElementSibling;
+            const icon = question.querySelector('i');
+
+            // Mevcut açık olanı kapat
+            faqQuestions.forEach(item => {
+                if (item !== question && item.classList.contains('active')) {
+                    item.classList.remove('active');
+                    item.nextElementSibling.classList.remove('active');
+                    item.querySelector('i').style.transform = 'rotate(0deg)';
+                    item.nextElementSibling.style.maxHeight = "0";
+                }
+            });
+
+            // Tıklananı aç/kapat
+            question.classList.toggle('active');
+            answer.classList.toggle('active');
+            if (question.classList.contains('active')) {
+                icon.style.transform = 'rotate(180deg)';
+                answer.style.maxHeight = answer.scrollHeight + 30 + "px"; 
+            } else {
+                icon.style.transform = 'rotate(0deg)';
+                answer.style.maxHeight = "0";
+            }
+        });
+    });
+
+    // 4. Yukarı Çık Düğmesi Fonksiyonu (Değişmedi)
+    const backToTopBtn = document.getElementById('backToTopBtn');
+    const mainHeader = document.getElementById('mainHeader');
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) { 
+            backToTopBtn.classList.add('show');
+            mainHeader.classList.add('scrolled'); 
+        } else {
+            backToTopBtn.classList.remove('show');
+            mainHeader.classList.remove('scrolled'); 
+        }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth' 
+        });
+    });
+
+    // 5. Navigasyon Aktif Link Vurgusu (Değişmedi)
+    const sections = document.querySelectorAll('section');
+    const navLinksList = document.querySelectorAll('.nav-links a:not(.cta-button)'); 
+
+    function activateNavLink() {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 200; 
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinksList.forEach(link => {
+            link.classList.remove('active-link');
+            if (link.getAttribute('href').includes(current)) {
+                link.classList.add('active-link');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', activateNavLink);
+    window.addEventListener('load', activateNavLink);
+
+
+    // 6. Ekrana Kaydırmada Animasyon Fonksiyonu (Değişmedi)
+    const observerOptions = {
+        root: null, 
+        rootMargin: '0px',
+        threshold: 0.2 
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animated');
+                observer.unobserve(entry.target); 
+            }
+        });
+    }, observerOptions);
+
+    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+
+    animatedElements.forEach(el => {
+        observer.observe(el);
+    });
+
+</script>
+
+</body>
+</html>
