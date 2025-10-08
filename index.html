@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartSoil Analyzer | Akıllı Toprak Analizi</title>
+    <title data-tr="SmartSoil Analyzer | Akıllı Toprak Analizi" data-en="SmartSoil Analyzer | Smart Soil Analysis">SmartSoil Analyzer | Akıllı Toprak Analizi</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
@@ -45,11 +45,11 @@
         }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         section { padding: 100px 0; text-align: center; }
-        h2 { font-size: 2.8em; color: var(--dark-green); margin-bottom: 50px; font-weight: 700; }
+        /* data-tr öznitelikleri olduğu için h2'ye .lang-element eklendi */
+        h2 { font-size: 2.8em; color: var(--dark-green); margin-bottom: 50px; font-weight: 700; } 
 
         /* HEADER & NAVİGASYON STİLLERİ */
         .header { 
-            /* background-color: #ffffff; -> Şeffaf yapıldı */
             background-color: var(--transparent-white); /* YENİ: Saydam beyaz */
             padding: 15px 50px; 
             display: flex; 
@@ -59,11 +59,11 @@
             position: sticky; 
             top: 0; 
             z-index: 1000;
-            transition: box-shadow 0.3s, background-color 0.3s; /* Transition eklendi */
+            transition: box-shadow 0.3s, background-color 0.3s; 
         }
         .header.scrolled {
             box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-            background-color: rgba(255, 255, 255, 0.95); /* Kaydırıldığında biraz daha opak olabilir */
+            background-color: rgba(255, 255, 255, 0.95); 
         }
         .logo a { 
             color: var(--dark-green);
@@ -75,6 +75,32 @@
         }
         .logo img { height: 40px; margin-right: 10px; }
         
+        /* YENİ: Dil Değiştirme Butonları */
+        .lang-switcher button {
+            background: none;
+            border: none;
+            color: #555;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 5px 10px;
+            margin-left: 10px;
+            border-radius: 5px;
+            transition: all 0.2s;
+            font-size: 0.95em;
+        }
+        .lang-switcher button:hover {
+            color: var(--primary-blue);
+            background-color: rgba(0, 123, 255, 0.1);
+        }
+        .lang-switcher button.active-lang {
+            background-color: var(--primary-green);
+            color: white;
+        }
+        .nav-group { /* Logo, Navigasyon ve Dil Seçiciyi tek bir konteynere almak için */
+            display: flex;
+            align-items: center;
+        }
+
         .menu-toggle {
             display: none;
             background: none;
@@ -85,6 +111,10 @@
             padding: 0;
         }
 
+        .nav-links {
+            display: flex; /* Nav ve CTA'yı aynı hizada tutmak için */
+            align-items: center;
+        }
         .nav-links a { 
             margin-left: 30px; 
             text-decoration: none; 
@@ -116,7 +146,6 @@
 
         /* HERO ve SECTION Stilleri */
         #hero { 
-            /* background: linear-gradient(135deg, #e0f2f1 0%, #e9ecef 100%); -> Şeffaf yapıldı */
             background-color: var(--transparent-hero-bg); /* YENİ: Saydam hero rengi */
             padding: 150px 20px; 
         }
@@ -126,8 +155,7 @@
         .cta-primary:hover { background-color: #0056b3; transform: scale(1.05); }
 
         #ozellikler { 
-            /* background-color: #ffffff; -> Şeffaf yapıldı */
-            background-color: var(--transparent-section-bg); /* YENİ: Saydam bölüm rengi */
+            background-color: var(--transparent-section-bg); 
         }
         .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 40px; }
         .feature-item { 
@@ -137,8 +165,7 @@
             text-align: center; 
             box-shadow: 0 15px 30px rgba(0,0,0,0.05); 
             transition: transform 0.3s, box-shadow 0.3s, opacity 0.6s ease-out, transform 0.6s ease-out; 
-            /* background-color: white; -> Şeffaf yapıldı */
-            background-color: var(--transparent-white); /* YENİ: Saydam kart rengi */
+            background-color: var(--transparent-white); 
         }
         .feature-item:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
         .feature-item i { font-size: 3.5em; color: var(--primary-green); margin-bottom: 20px; }
@@ -149,15 +176,13 @@
         .animated { opacity: 1; transform: translateY(0); }
 
         #ekip { 
-            /* background-color: var(--bg-light); -> Şeffaf yapıldı */
-            background-color: var(--transparent-section-bg); /* YENİ: Saydam bölüm rengi */
+            background-color: var(--transparent-section-bg); 
         }
         .team-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 40px; }
         .team-member { 
             width: 250px; 
             padding: 30px; 
-            /* background-color: #fff; -> Şeffaf yapıldı */
-            background-color: var(--transparent-white); /* YENİ: Saydam kart rengi */
+            background-color: var(--transparent-white); 
             border-radius: 10px; 
             box-shadow: 0 8px 15px rgba(0,0,0,0.1);
             text-align: center;
@@ -176,20 +201,18 @@
         .team-member p { font-size: 0.95em; color: #777; }
         
         #iletisim { 
-            /* background-color: #ffffff; -> Şeffaf yapıldı */
-            background-color: var(--transparent-section-bg); /* YENİ: Saydam bölüm rengi */
+            background-color: var(--transparent-section-bg); 
         }
         #iletisim form { 
             max-width: 600px; margin: 0 auto; text-align: left; padding: 30px; border-radius: 8px; 
-            /* box-shadow: 0 5px 15px rgba(0,0,0,0.05); -> gölgesi hafifletildi */
-            box-shadow: 0 5px 15px rgba(0,0,0,0.03); /* YENİ: Daha hafif gölge */
-            background-color: var(--transparent-white); /* YENİ: Saydam form arka planı */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03); 
+            background-color: var(--transparent-white); 
         }
         #iletisim label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--dark-green); }
         #iletisim input[type="text"], #iletisim input[type="email"], #iletisim textarea {
             width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;
             transition: border-color 0.3s, box-shadow 0.3s;
-            background-color: rgba(255, 255, 255, 0.7); /* YENİ: Input alanları da saydam */
+            background-color: rgba(255, 255, 255, 0.7); 
         }
         #iletisim input:focus, #iletisim textarea:focus {
              border-color: var(--primary-blue);
@@ -202,19 +225,17 @@
 
         /* SIKÇA SORULAN SORULAR (SSS) BÖLÜMÜ */
         #sss { 
-            /* background-color: var(--light-gray-bg); -> Şeffaf yapıldı */
-            background-color: var(--transparent-section-bg); /* YENİ: Saydam bölüm rengi */
+            background-color: var(--transparent-section-bg); 
             padding: 100px 0; text-align: center; 
         }
         .faq-container { max-width: 800px; margin: 50px auto 0 auto; text-align: left; }
         .faq-item { 
             border: 1px solid #eee; border-radius: 8px; margin-bottom: 15px; overflow: hidden; 
-            background-color: var(--transparent-white); /* YENİ: SSS öğeleri de saydam */
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* SSS öğelerine hafif gölge */
+            background-color: var(--transparent-white); 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); 
         }
         .faq-question {
-            /* background-color: #ffffff; -> Şeffaf yapıldı */
-            background-color: rgba(255, 255, 255, 0.9); /* YENİ: Soru kısmı biraz daha opak */
+            background-color: rgba(255, 255, 255, 0.9); 
             padding: 20px 25px;
             cursor: pointer;
             display: flex;
@@ -225,12 +246,11 @@
             font-size: 1.1em;
             transition: background-color 0.3s;
         }
-        .faq-question:hover { background-color: rgba(240, 240, 240, 0.9); } /* Hover'da hafif opaklık */
+        .faq-question:hover { background-color: rgba(240, 240, 240, 0.9); } 
         .faq-question i { transition: transform 0.3s ease; }
         .faq-question.active i { transform: rotate(180deg); }
         .faq-answer {
-            /* background-color: var(--bg-light); -> Şeffaf yapıldı */
-            background-color: rgba(248, 249, 250, 0.8); /* YENİ: Cevap kısmı hafif saydam */
+            background-color: rgba(248, 249, 250, 0.8); 
             padding: 0 25px;
             max-height: 0;
             overflow: hidden;
@@ -242,11 +262,10 @@
 
         /* FOOTER STİLLERİ */
         .footer { 
-            /* background-color: var(--footer-bg); -> Şeffaf yapıldı */
-            background-color: var(--transparent-dark-bg); /* YENİ: Saydam koyu footer */
+            background-color: var(--transparent-dark-bg); 
             color: var(--footer-text); padding: 50px 0 20px 0; font-size: 0.95em; 
         }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; text-align: left; padding-bottom: 40px; border-bottom: 1px solid rgba(52, 58, 64, 0.5); /* YENİ: Border da saydam yapıldı */ }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; text-align: left; padding-bottom: 40px; border-bottom: 1px solid rgba(52, 58, 64, 0.5); }
         .footer h4 { color: #ffffff; margin-bottom: 15px; font-size: 1.1em; font-weight: 600; }
         .footer ul { list-style: none; padding: 0; margin: 0; }
         .footer ul li { margin-bottom: 10px; }
@@ -256,11 +275,11 @@
         .social-links a:hover { color: var(--primary-green); }
         .copyright { text-align: center; margin-top: 20px; padding-top: 10px; color: #6c757d; font-size: 0.9em; }
 
-        /* RESPONSIVE DÜZENLEME (Değişmedi) */
+        /* RESPONSIVE DÜZENLEME */
         @media (max-width: 768px) {
             .header { padding: 15px 20px; }
             .menu-toggle { display: block; z-index: 1001; }
-            .nav-links { position: fixed; top: 0; left: -100%; width: 100%; height: 100vh; background-color: var(--transparent-white); /* Mobil menü de saydam */ flex-direction: column; justify-content: center; align-items: center; padding-top: 60px; transition: left 0.3s ease-in-out; }
+            .nav-links { position: fixed; top: 0; left: -100%; width: 100%; height: 100vh; background-color: var(--transparent-white); flex-direction: column; justify-content: center; align-items: center; padding-top: 60px; transition: left 0.3s ease-in-out; }
             .nav-links.active { left: 0; }
             .nav-links a { margin: 20px 0; font-size: 1.4em; color: var(--text-dark); width: 80%; text-align: center; padding: 10px 0; }
             .cta-button { margin-top: 30px; width: 60%; }
@@ -306,52 +325,59 @@
         <div class="logo">
             <a href="#hero">
                 <img src="smartsoil-logo.png" alt="SmartSoil Analyzer Logo"> 
-                <span>SmartSoil Analyzer</span>
+                <span data-tr="SmartSoil Analyzer" data-en="SmartSoil Analyzer">SmartSoil Analyzer</span>
             </a>
         </div>
         
-        <button class="menu-toggle" aria-label="Menü Aç/Kapa" id="menu-toggle">
-            <i class="fas fa-bars"></i>
-        </button>
+        <div class="nav-group">
+            <nav class="nav-links" id="nav-links">
+                <a href="#ozellikler" data-tr="Vizyon" data-en="Vision">Vizyon</a>
+                <a href="#ekip" data-tr="Ekip" data-en="Team">Ekip</a> 
+                <a href="#sss" data-tr="Proje Bilgisi" data-en="Project Info">Proje Bilgisi</a> 
+                <a href="#iletisim" data-tr="İletişim" data-en="Contact">İletişim</a>
+                <a href="#iletisim" class="cta-button" data-tr="PROJEYİ İNCELE" data-en="EXPLORE PROJECT">PROJEYİ İNCELE</a>
+            </nav>
 
-        <nav class="nav-links" id="nav-links">
-            <a href="#ozellikler">Vizyon</a>
-            <a href="#ekip">Ekip</a> 
-            <a href="#sss">Proje Bilgisi</a> 
-            <a href="#iletisim">İletişim</a>
-            <a href="#iletisim" class="cta-button">PROJEYİ İNCELE</a>
-        </nav>
+            <div class="lang-switcher">
+                <button id="lang-tr" class="active-lang" onclick="switchLanguage('tr')">TR</button>
+                <button id="lang-en" onclick="switchLanguage('en')">EN</button>
+            </div>
+
+            <button class="menu-toggle" aria-label="Menü Aç/Kapa" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
     </header>
 
     <section id="hero">
         <div class="container">
-            <h1>Geleceğin Akıllı Toprak Analizi Projesinin Vizyonu.</h1>
-            <p>SmartSoil Analyzer ile toprak kalitesini dijitalize ederek, kaynak (su/gübre) kullanımını optimize etme potansiyelini maksimize etmeyi hedefliyoruz.</p>
-            <a href="#ozellikler" class="cta-primary">DAHA FAZLA KEŞFET</a>
+            <h1 data-tr="Geleceğin Akıllı Toprak Analizi Projesinin Vizyonu." data-en="Vision of the Future Smart Soil Analysis Project.">Geleceğin Akıllı Toprak Analizi Projesinin Vizyonu.</h1>
+            <p data-tr="SmartSoil Analyzer ile toprak kalitesini dijitalize ederek, kaynak (su/gübre) kullanımını optimize etme potansiyelini maksimize etmeyi hedefliyoruz." data-en="With SmartSoil Analyzer, we aim to digitalize soil quality to maximize the potential for optimizing resource (water/fertilizer) usage.">SmartSoil Analyzer ile toprak kalitesini dijitalize ederek, kaynak (su/gübre) kullanımını optimize etme potansiyelini maksimize etmeyi hedefliyoruz.</p>
+            <a href="#ozellikler" class="cta-primary" data-tr="DAHA FAZLA KEŞFET" data-en="DISCOVER MORE">DAHA FAZLA KEŞFET</a>
         </div>
     </section>
 
     <section id="ozellikler">
         <div class="container">
-            <h2>Projemizin Temel Vizyonu</h2>
+            <h2 data-tr="Projemizin Temel Vizyonu" data-en="Our Project's Core Vision">Projemizin Temel Vizyonu</h2>
             <div class="feature-grid">
                 
                 <div class="feature-item animate-on-scroll">
                     <i class="fas fa-flask"></i>
-                    <h3>Hedeflenen Anlık Analiz</h3>
-                    <p>Geliştirmekte olduğumuz cihaz, toprağın fiziksel ve kimyasal özelliklerini saha koşullarında, anlık olarak ölçebilen taşınabilir bir prototip olmayı amaçlamaktadır.</p>
+                    <h3 data-tr="Hedeflenen Anlık Analiz" data-en="Targeted Instant Analysis">Hedeflenen Anlık Analiz</h3>
+                    <p data-tr="Geliştirmekte olduğumuz cihaz, toprağın fiziksel ve kimyasal özelliklerini saha koşullarında, anlık olarak ölçebilen taşınabilir bir prototip olmayı amaçlamaktadır." data-en="The device we are developing aims to be a portable prototype that can instantly measure the physical and chemical properties of soil under field conditions.">Geliştirmekte olduğumuz cihaz, toprağın fiziksel ve kimyasal özelliklerini saha koşullarında, anlık olarak ölçebilen taşınabilir bir prototip olmayı amaçlamaktadır.</p>
                 </div>
                 
                 <div class="feature-item animate-on-scroll">
                     <i class="fas fa-seedling"></i>
-                    <h3>Yapay Zeka Prototip Entegrasyonu</h3>
-                    <p>Toplanan verilerin, yapay zekâ modeli ile işlenerek, bölgesel veri tabanına göre **tahmini** kalite skoru ve **önerilen** ürün listesini sunması hedeflenmektedir.</p>
+                    <h3 data-tr="Yapay Zeka Prototip Entegrasyonu" data-en="AI Prototype Integration">Yapay Zeka Prototip Entegrasyonu</h3>
+                    <p data-tr="Toplanan verilerin, yapay zekâ modeli ile işlenerek, bölgesel veri tabanına göre tahmini kalite skoru ve önerilen ürün listesini sunması hedeflenmektedir." data-en="The collected data is intended to be processed by an AI model to present an estimated quality score and recommended product list based on the regional database.">Toplanan verilerin, yapay zekâ modeli ile işlenerek, bölgesel veri tabanına göre **tahmini** kalite skoru ve **önerilen** ürün listesini sunması hedeflenmektedir.</p>
                 </div>
                 
                 <div class="feature-item animate-on-scroll">
                     <i class="fas fa-tachometer-alt"></i>
-                    <h3>Sensör Hassasiyeti Çalışmaları</h3>
-                    <p>Proje kapsamında pH, Nem ve Sıcaklık sensörlerinin yüksek hassasiyetle ölçüm yapması için gerekli elektronik donanım ve yazılım optimizasyonları devam etmektedir.</p>
+                    <h3 data-tr="Sensör Hassasiyeti Çalışmaları" data-en="Sensor Accuracy Studies">Sensör Hassasiyeti Çalışmaları</h3>
+                    <p data-tr="Proje kapsamında pH, Nem ve Sıcaklık sensörlerinin yüksek hassasiyetle ölçüm yapması için gerekli elektronik donanım ve yazılım optimizasyonları devam etmektedir." data-en="Within the scope of the project, necessary electronic hardware and software optimizations are ongoing to ensure high-accuracy measurements from pH, Humidity, and Temperature sensors.">Proje kapsamında pH, Nem ve Sıcaklık sensörlerinin yüksek hassasiyetle ölçüm yapması için gerekli elektronik donanım ve yazılım optimizasyonları devam etmektedir.</p>
                 </div>
                 
             </div>
@@ -360,22 +386,22 @@
 
     <section id="ekip">
         <div class="container">
-            <h2>Ekibimizle Tanışın</h2>
+            <h2 data-tr="Ekibimizle Tanışın" data-en="Meet Our Team">Ekibimizle Tanışın</h2>
             <div class="team-grid">
                 <div class="team-member animate-on-scroll">
                     <img src="https://i.ibb.co/L519V1j/duhan-efe.jpg" alt="Duhan Efe Aydoğan Fotoğrafı"> 
                     <h4>Duhan Efe Aydoğan</h4>
-                    <p>Proje Ortağı / Yazılım</p>
+                    <p data-tr="Proje Ortağı / Yazılım" data-en="Project Partner / Software">Proje Ortağı / Yazılım</p>
                 </div>
                 <div class="team-member animate-on-scroll" style="transition-delay: 0.2s;">
                     <img src="https://i.ibb.co/GvxYh7y/furkan.jpg" alt="Muhammet Furkan Çalışkan Fotoğrafı"> 
                     <h4>Muhammet Furkan Çalışkan</h4>
-                    <p>Proje Ortağı / Donanım</p>
+                    <p data-tr="Proje Ortağı / Donanım" data-en="Project Partner / Hardware">Proje Ortağı / Donanım</p>
                 </div>
                 <div class="team-member animate-on-scroll" style="transition-delay: 0.4s;">
                     <img src="https://i.ibb.co/pwnpT8V/alperen.jpg" alt="Alperen Güngör Fotoğrafı"> 
                     <h4>Alperen Güngör</h4>
-                    <p>Proje Ortağı / Tasarım & UI</p>
+                    <p data-tr="Proje Ortağı / Tasarım & UI" data-en="Project Partner / Design & UI">Proje Ortağı / Tasarım & UI</p>
                 </div>
             </div>
         </div>
@@ -383,39 +409,42 @@
 
     <section id="sss"> 
         <div class="container">
-            <h2>Proje Detayları ve Yol Haritası</h2>
+            <h2 data-tr="Proje Detayları ve Yol Haritası" data-en="Project Details and Roadmap">Proje Detayları ve Yol Haritası</h2>
             <div class="faq-container">
                 <div class="faq-item animate-on-scroll">
-                    
+                    <div class="faq-question" data-tr="Proje Şu Anda Hangi Aşamadadır?" data-en="What is the Current Phase of the Project?">
+                        Proje Şu Anda Hangi Aşamadadır?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
                     <div class="faq-answer">
-                        <p>Projemiz şu anda **donanım prototipleme (MVP)** aşamasındadır. Elektronik kart tasarımı tamamlandı ve ilk yazılım modülleri (sensör okuma ve veri işleme) geliştirilmektedir. Hedefimiz 2024 sonuna kadar saha testlerine başlamaktır.</p>
+                        <p data-tr="Projemiz şu anda donanım prototipleme (MVP) aşamasındadır. Elektronik kart tasarımı tamamlandı ve ilk yazılım modülleri (sensör okuma ve veri işleme) geliştirilmektedir. Hedefimiz 2024 sonuna kadar saha testlerine başlamaktır." data-en="Our project is currently in the hardware prototyping (MVP) phase. Electronic board design is complete, and the initial software modules (sensor reading and data processing) are being developed. Our goal is to begin field testing by the end of 2024.">Projemiz şu anda **donanım prototipleme (MVP)** aşamasındadır. Elektronik kart tasarımı tamamlandı ve ilk yazılım modülleri (sensör okuma ve veri işleme) geliştirilmektedir. Hedefimiz 2024 sonuna kadar saha testlerine başlamaktır.</p>
                     </div>
                 </div>
                 <div class="faq-item animate-on-scroll">
-                    <div class="faq-question">
+                    <div class="faq-question" data-tr="Proje İçin Hangi Teknolojiler Kullanılıyor?" data-en="Which Technologies are Used for the Project?">
                         Proje İçin Hangi Teknolojiler Kullanılıyor?
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Donanım için Arduino/ESP32 mikrodenetleyiciler, yazılım tarafında Python (veri işleme ve AI modelleri için) ve mobil arayüz için React Native (hedeflenen mobil uygulamada) kullanılması planlanmaktadır.</p>
+                        <p data-tr="Donanım için Arduino/ESP32 mikrodenetleyiciler, yazılım tarafında Python (veri işleme ve AI modelleri için) ve mobil arayüz için React Native (hedeflenen mobil uygulamada) kullanılması planlanmaktadır." data-en="Arduino/ESP32 microcontrollers are planned for hardware, Python for software (for data processing and AI models), and React Native for the mobile interface (in the targeted mobile application).">Donanım için Arduino/ESP32 mikrodenetleyiciler, yazılım tarafında Python (veri işleme ve AI modelleri için) ve mobil arayüz için React Native (hedeflenen mobil uygulamada) kullanılması planlanmaktadır.</p>
                     </div>
                 </div>
                 <div class="faq-item animate-on-scroll">
-                    <div class="faq-question">
+                    <div class="faq-question" data-tr="Cihazın Üretim Maliyet Tahmini Ne Kadar?" data-en="What is the Estimated Production Cost of the Device?">
                         Cihazın Üretim Maliyet Tahmini Ne Kadar?
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Prototip maliyet analizine göre, cihazın seri üretimdeki tahmini birim maliyetinin 50 ila 80 USD bandında olması hedeflenmektedir. Bu maliyet, sensör hassasiyeti ve kasa malzemesi seçimine göre değişebilir.</p>
+                        <p data-tr="Prototip maliyet analizine göre, cihazın seri üretimdeki tahmini birim maliyetinin 50 ila 80 USD bandında olması hedeflenmektedir. Bu maliyet, sensör hassasiyeti ve kasa malzemesi seçimine göre değişebilir." data-en="According to the prototype cost analysis, the estimated unit cost of the device in mass production is targeted to be between 50 and 80 USD. This cost may vary depending on sensor accuracy and casing material selection.">Prototip maliyet analizine göre, cihazın seri üretimdeki tahmini birim maliyetinin 50 ila 80 USD bandında olması hedeflenmektedir. Bu maliyet, sensör hassasiyeti ve kasa malzemesi seçimine göre değişebilir.</p>
                     </div>
                 </div>
                 <div class="faq-item animate-on-scroll">
-                    <div class="faq-question">
+                    <div class="faq-question" data-tr="Proje Desteği ve Yatırımcılık Olanakları Nelerdir?" data-en="What are the Project Support and Investment Opportunities?">
                         Proje Desteği ve Yatırımcılık Olanakları Nelerdir?
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Projemiz aktif olarak TeknoFest programlarına başvurmaktadır. Yatırım ve iş birliği teklifleri için İletişim bölümünden bizimle doğrudan temasa geçebilirsiniz.</p>
+                        <p data-tr="Projemiz aktif olarak TeknoFest programlarına başvurmaktadır. Yatırım ve iş birliği teklifleri için İletişim bölümünden bizimle doğrudan temasa geçebilirsiniz." data-en="Our project is actively applying to TeknoFest programs. For investment and collaboration offers, you can contact us directly through the Contact section.">Projemiz aktif olarak TeknoFest programlarına başvurmaktadır. Yatırım ve iş birliği teklifleri için İletişim bölümünden bizimle doğrudan temasa geçebilirsiniz.</p>
                     </div>
                 </div>
             </div>
@@ -424,18 +453,18 @@
 
     <section id="iletisim">
         <div class="container">
-            <h2>Bizimle İletişime Geçin</h2>
+            <h2 data-tr="Bizimle İletişime Geçin" data-en="Contact Us">Bizimle İletişime Geçin</h2>
             <form id="contact-form" action="https://formspree.io/f/meorznbn" method="POST">
-                <label for="name">Adınız Soyadınız</label>
+                <label for="name" data-tr="Adınız Soyadınız" data-en="Your Name and Surname">Adınız Soyadınız</label>
                 <input type="text" id="name" name="Ad Soyad" required>
 
-                <label for="email">E-posta Adresiniz</label>
+                <label for="email" data-tr="E-posta Adresiniz" data-en="Your Email Address">E-posta Adresiniz</label>
                 <input type="email" id="email" name="E-posta" required>
 
-                <label for="message">Mesajınız</label>
+                <label for="message" data-tr="Mesajınız" data-en="Your Message">Mesajınız</label>
                 <textarea id="message" name="Mesaj" rows="6" required></textarea>
 
-                <button type="submit">Mesajı Gönder</button>
+                <button type="submit" data-tr="Mesajı Gönder" data-en="Send Message">Mesajı Gönder</button>
             </form>
             <p id="status-message" class="status-message"></p>
         </div>
@@ -446,8 +475,8 @@
             <div class="footer-grid">
                 
                 <div class="footer-info">
-                    <h4>SmartSoil Analyzer</h4>
-                    <p>Akıllı toprak analizi projesi. Tarım teknolojilerinde geleceğe yatırım yapıyoruz.</p>
+                    <h4 data-tr="SmartSoil Analyzer" data-en="SmartSoil Analyzer">SmartSoil Analyzer</h4>
+                    <p data-tr="Akıllı toprak analizi projesi. Tarım teknolojilerinde geleceğe yatırım yapıyoruz." data-en="Smart soil analysis project. We are investing in the future of agricultural technologies.">Akıllı toprak analizi projesi. Tarım teknolojilerinde geleceğe yatırım yapıyoruz.</p>
                     <div class="social-links" style="margin-top: 15px;">
                         <a href="https://twitter.com" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                         <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
@@ -456,20 +485,20 @@
                 </div>
 
                 <div class="footer-links">
-                    <h4>Hızlı Erişim</h4>
+                    <h4 data-tr="Hızlı Erişim" data-en="Quick Access">Hızlı Erişim</h4>
                     <ul>
-                        <li><a href="#hero">Ana Sayfa</a></li>
-                        <li><a href="#ozellikler">Proje Vizyonu</a></li>
-                        <li><a href="#ekip">Ekibimiz</a></li>
-                        <li><a href="#sss">Proje Bilgisi</a></li> 
-                        <li><a href="#iletisim">Bize Ulaşın</a></li>
+                        <li><a href="#hero" data-tr="Ana Sayfa" data-en="Home">Ana Sayfa</a></li>
+                        <li><a href="#ozellikler" data-tr="Proje Vizyonu" data-en="Project Vision">Proje Vizyonu</a></li>
+                        <li><a href="#ekip" data-tr="Ekibimiz" data-en="Our Team">Ekibimiz</a></li>
+                        <li><a href="#sss" data-tr="Proje Bilgisi" data-en="Project Info">Proje Bilgisi</a></li> 
+                        <li><a href="#iletisim" data-tr="Bize Ulaşın" data-en="Contact Us">Bize Ulaşın</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-contact">
-                    <h4>İletişim</h4>
+                    <h4 data-tr="İletişim" data-en="Contact">İletişim</h4>
                     <ul>
-                        <li><i class="fas fa-map-marker-alt" style="margin-right: 8px;"></i> Kağıthane, İstanbul, TR</li>
+                        <li data-tr="Kağıthane, İstanbul, TR" data-en="Kağıthane, Istanbul, TR"><i class="fas fa-map-marker-alt" style="margin-right: 8px;"></i> Kağıthane, İstanbul, TR</li>
                         <li><i class="fas fa-phone" style="margin-right: 8px;"></i> +90 537 948 72 58</li>
                         <li><i class="fas fa-envelope" style="margin-right: 8px;"></i> alperengungrr@Gmail.com</li>
                     </ul>
@@ -477,7 +506,7 @@
 
             </div>
             
-            <p class="copyright">
+            <p class="copyright" data-tr="&copy; 2026 SmartSoil Analyzer Projesi. Tüm Hakları Saklıdır." data-en="&copy; 2026 SmartSoil Analyzer Project. All Rights Reserved.">
                 &copy; 2026 SmartSoil Analyzer Projesi. Tüm Hakları Saklıdır.
             </p>
         </div>
@@ -488,6 +517,49 @@
     </button>
 
 <script>
+    // Yeni Eklendi: Dil Değiştirme Fonksiyonu
+    function switchLanguage(lang) {
+        document.documentElement.lang = lang; // HTML lang özniteliğini günceller
+
+        // Tüm metin elementlerini seçer
+        const elements = document.querySelectorAll('[data-tr], [data-en]');
+
+        elements.forEach(el => {
+            const translation = el.getAttribute(`data-${lang}`);
+            if (translation) {
+                // Sadece metin içeriğini günceller
+                if (el.tagName === 'TITLE') {
+                    document.title = translation;
+                } else if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    // Input placeholder metnini çevirmek isterseniz burayı kullanabilirsiniz
+                } else {
+                    el.textContent = translation;
+                }
+            }
+        });
+
+        // Aktif dil düğmesini işaretler
+        document.querySelectorAll('.lang-switcher button').forEach(button => {
+            button.classList.remove('active-lang');
+        });
+        document.getElementById(`lang-${lang}`).classList.add('active-lang');
+    }
+
+    // Sayfa yüklendiğinde varsayılan dilin Türkçe olmasını sağlar
+    document.addEventListener('DOMContentLoaded', () => {
+        // Tarayıcı depolamasından (localStorage) son kullanılan dili yükle
+        const savedLang = localStorage.getItem('siteLang') || 'tr';
+        switchLanguage(savedLang); 
+    });
+
+    // switchLanguage fonksiyonunun tarayıcı deposuna kaydetme özelliğini ekleyelim (Önceki kodu değiştirmek yerine üzerine yazıyorum)
+    const originalSwitchLanguage = switchLanguage;
+    switchLanguage = (lang) => {
+        originalSwitchLanguage(lang);
+        localStorage.setItem('siteLang', lang); // Dili kaydet
+    };
+
+
     // 1. Burger Menü Fonksiyonu (Değişmedi)
     const menuToggle = document.getElementById('menu-toggle');
     const navLinks = document.getElementById('nav-links');
@@ -517,12 +589,30 @@
         });
     });
 
-    // 2. İletişim Formu Fonksiyonu (Değişmedi)
+    // 2. İletişim Formu Fonksiyonu (Mesaj çevirisi için güncellendi)
     const form = document.getElementById("contact-form");
     const statusMessage = document.getElementById("status-message");
 
-    function displayMessage(message, isSuccess) {
-        statusMessage.textContent = message;
+    const messages = {
+        tr: {
+            success: "Mesajınız başarıyla gönderildi. Teşekkür ederiz! 🌱",
+            sending: "Gönderiliyor...",
+            error: "Oops! Bir sorun oluştu, mesaj gönderilemedi.",
+            connection: "Bağlantı hatası: Mesajınız gönderilemedi. Lütfen internet bağlantınızı kontrol edin."
+        },
+        en: {
+            success: "Your message has been sent successfully. Thank you! 🌱",
+            sending: "Sending...",
+            error: "Oops! A problem occurred, the message could not be sent.",
+            connection: "Connection error: Your message could not be sent. Please check your internet connection."
+        }
+    };
+
+    function displayMessage(messageKey, isSuccess) {
+        const lang = document.documentElement.lang || 'tr';
+        const messageText = messages[lang][messageKey] || messageKey; // messages'ta yoksa key'in kendisini kullan
+
+        statusMessage.textContent = messageText;
         statusMessage.className = `status-message ${isSuccess ? 'status-success' : 'status-error'}`;
         statusMessage.style.display = "block";
     }
@@ -531,7 +621,11 @@
         event.preventDefault();
         
         const submitButton = form.querySelector('button[type="submit"]');
-        submitButton.textContent = 'Gönderiliyor...';
+        
+        // Gönder düğmesini çevir
+        const currentLang = document.documentElement.lang || 'tr';
+        const originalButtonText = submitButton.getAttribute(`data-${currentLang}`) || submitButton.textContent;
+        submitButton.textContent = messages[currentLang].sending;
         submitButton.disabled = true;
         statusMessage.style.display = "none";
 
@@ -547,20 +641,16 @@
             });
 
             if (response.ok) {
-                displayMessage("Mesajınız başarıyla gönderildi. Teşekkür ederiz! 🌱", true);
+                displayMessage("success", true);
                 form.reset(); 
             } else {
-                const errorData = await response.json();
-                const errorMessage = errorData.errors ? 
-                                    errorData.errors.map(error => error.message).join(", ") : 
-                                    "Oops! Bir sorun oluştu, mesaj gönderilemedi.";
-                
-                displayMessage(errorMessage, false);
+                displayMessage("error", false);
             }
         } catch (error) {
-            displayMessage("Bağlantı hatası: Mesajınız gönderilemedi. Lütfen internet bağlantınızı kontrol edin.", false);
+            displayMessage("connection", false);
         } finally {
-            submitButton.textContent = 'Mesajı Gönder';
+            // Buton metnini eski haline getir
+            submitButton.textContent = originalButtonText; 
             submitButton.disabled = false;
         }
     }
@@ -574,7 +664,6 @@
             const answer = question.nextElementSibling;
             const icon = question.querySelector('i');
 
-            // Mevcut açık olanı kapat
             faqQuestions.forEach(item => {
                 if (item !== question && item.classList.contains('active')) {
                     item.classList.remove('active');
@@ -584,7 +673,6 @@
                 }
             });
 
-            // Tıklananı aç/kapat
             question.classList.toggle('active');
             answer.classList.toggle('active');
             if (question.classList.contains('active')) {
